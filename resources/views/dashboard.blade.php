@@ -56,7 +56,7 @@
                             </div>
                             <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-success mr-2">
-                                    {{ number_format(($activeTenants / $totalTenants) * 100, 1) }}%
+                                    {{ $totalTenants > 0 ? number_format(($activeTenants / $totalTenants) * 100, 1) : 0 }}%
                                 </span>
                                 <span>del total</span>
                             </div>
@@ -155,14 +155,14 @@
                         <div class="progress mb-2" style="height: 8px;">
                             <div class="progress-bar bg-{{ $plan->color }}" 
                                  role="progressbar" 
-                                 style="width: {{ ($plan->tenant_count / $totalTenants) * 100 }}%"
-                                 aria-valuenow="{{ ($plan->tenant_count / $totalTenants) * 100 }}" 
+                                 style="width: {{ $totalTenants > 0 ? ($plan->tenant_count / $totalTenants) * 100 : 0}}%"
+                                 aria-valuenow="{{ $totalTenants > 0 ? ($plan->tenant_count / $totalTenants) * 100 : 0 }}" 
                                  aria-valuemin="0" 
                                  aria-valuemax="100">
                             </div>
                         </div>
                         <small class="text-muted">
-                            {{ number_format(($plan->tenant_count / $totalTenants) * 100, 1) }}% • 
+                            {{ $totalTenants > 0 ? number_format(($plan->tenant_count / $totalTenants) * 100, 1) : 0 }}% • 
                             ${{ number_format($plan->price, 2) }} /mes
                         </small>
                     </div>
