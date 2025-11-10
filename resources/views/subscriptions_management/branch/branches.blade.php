@@ -110,14 +110,13 @@
                                         <h6 class="text-primary mb-3">Información Adicional</h6>
                                         <p class="mb-2">
                                             <i class="bi bi-hash me-2 text-muted"></i> 
-                                            <span class="text-dark">{{ $branch->code ?? 'No especificado' }}</span>
+                                            <span class="text-dark"><strong>Código:</strong> {{ $branch->code ?? 'No especificado' }}</span>
                                         </p>
-                                        @if($branch->license_number)
+                                        
                                         <p class="mb-0">
                                             <i class="bi bi-file-medical me-2 text-muted"></i> 
-                                            <span class="text-dark">{{ $branch->license_number }}</span>
+                                            <span class="text-dark"><strong>NO. de licencia sanitaria (COFEPRIS):</strong> {{ $branch->license_number ?? 'No especificado' }}</span>
                                         </p>
-                                        @endif
                                     </div>
                                 </div>
                             </div>

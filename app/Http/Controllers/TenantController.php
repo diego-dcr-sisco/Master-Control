@@ -310,11 +310,11 @@ class TenantController extends Controller
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'code' => 'required|string|max:50',
+            'code' => 'nullable|integer|min:0',
             'license_number' => 'nullable|string|max:255',
-            'fiscal_name' => 'required|string|max:255',
-            'fiscal_regime' => 'required|string|max:255',
-            'rfc' => 'required|string|max:20'
+            'fiscal_name' => 'nullable|string|max:255',
+            'fiscal_regime' => 'nullable|string|max:255',
+            'rfc' => 'nullable|string|max:20'
         ]);
 
         $branch = Branch::where('id', $branchId)

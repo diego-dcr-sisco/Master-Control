@@ -42,17 +42,20 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="code" class="form-label">Código <span class="text-danger">*</span></label>
-                                    <input type="text" 
-                                           class="form-control @error('code') is-invalid @enderror" 
-                                           id="code" 
-                                           name="code" 
-                                           value="{{ old('code', $branch->code) }}" 
-                                           required>
-                                    @error('code')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                <label for="code" class="form-label">Código</label>
+                                <input type="number" 
+                                       class="form-control @error('code') is-invalid @enderror" 
+                                       id="code" 
+                                       name="code" 
+                                       value="{{ old('code', $branch->code) }}"
+                                       min="0"
+                                       step="1"
+                                       placeholder="Ej. 0">
+                                @error('code')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                 <small class="form-text text-muted">Solo números enteros estan permitidos. Ej. 0, 1, 2....</small>
+                            </div>
                             </div>
                         </div>
 
@@ -207,39 +210,36 @@
                             <h6 class="text-primary mb-3">Información Fiscal</h6>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="fiscal_name" class="form-label">Razón Social <span class="text-danger">*</span></label>
+                                    <label for="fiscal_name" class="form-label">Razón Social</label>
                                     <input type="text" 
                                            class="form-control @error('fiscal_name') is-invalid @enderror" 
                                            id="fiscal_name" 
                                            name="fiscal_name" 
-                                           value="{{ old('fiscal_name', $branch->fiscal_name) }}" 
-                                           required
+                                           value="{{ old('fiscal_name', $branch->fiscal_name) }}"
                                            placeholder="Ingrese la Razón Social">
                                     @error('fiscal_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="fiscal_regime" class="form-label">Régimen Fiscal <span class="text-danger">*</span></label>
+                                    <label for="fiscal_regime" class="form-label">Régimen Fiscal</label>
                                     <input type="text" 
                                            class="form-control @error('fiscal_regime') is-invalid @enderror" 
                                            id="fiscal_regime" 
                                            name="fiscal_regime" 
-                                           value="{{ old('fiscal_regime', $branch->fiscal_regime) }}" 
-                                           required
+                                           value="{{ old('fiscal_regime', $branch->fiscal_regime) }}"
                                            placeholder="Ingrese el Régimen Fiscal">
                                     @error('fiscal_regime')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="rfc" class="form-label">RFC <span class="text-danger">*</span></label>
+                                    <label for="rfc" class="form-label">RFC</label>
                                     <input type="text" 
                                            class="form-control @error('rfc') is-invalid @enderror" 
                                            id="rfc" 
                                            name="rfc" 
                                            value="{{ old('rfc', $branch->rfc) }}" 
-                                           required
                                            placeholder="Ingrese el RFC">
                                     @error('rfc')
                                         <div class="invalid-feedback">{{ $message }}</div>
