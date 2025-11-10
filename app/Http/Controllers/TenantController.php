@@ -92,7 +92,7 @@ class TenantController extends Controller
                 'plan_id' => $validated['plan_id'],
                 'subscription_start' => $validated['subscription_start'],
                 'subscription_end' => $validated['subscription_end'],
-                'path' => "tenants/{$slug}/",
+                'path' => "{$slug}/",
             ]);
 
             // recorrer la lista de permisos de spatie  y crear las relaciones en tenant_permission_control
