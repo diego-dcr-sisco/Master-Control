@@ -15,18 +15,19 @@ class PlanSeeder extends Seeder
     {
         $plan1 = Plan::create([
             'name' => 'Lite',
-            'limit_users' => 10,   
+            'limit_users' => 5,   
         ]);
 
         $plan2 = Plan::create([
             'name' => 'Lite+',
-            'limit_users' => 40,    
+            'limit_users' => 10,    
         ]);
 
         $plan3 = Plan::create([
             'name' => 'Pro',
-            'limit_users' => 100,    
+            'limit_users' => 20,    
         ]);
 
     }
 }
+    
