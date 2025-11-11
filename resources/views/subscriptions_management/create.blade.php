@@ -10,15 +10,48 @@
     </div>
     <div class="container-fluid">
         <div class="col-12">
-                <div>
-                    <form action="{{ route('subscriptions.store') }}" method="POST" id="tenantForm">
-                        @csrf
-                        <!-- Información General -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">Información General</h5>
+            <form action="{{ route('subscriptions.store') }}" method="POST" id="tenantForm" enctype="multipart/form-data">
+                @csrf
+                
+                <!-- Logo del Cliente -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Logo del Cliente</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="logo" class="form-label">Logo de la Empresa</label>
+                                <input type="file" 
+                                       class="form-control @error('logo') is-invalid @enderror" 
+                                       id="logo" 
+                                       name="logo" 
+                                       accept="image/*">
+                                @error('logo')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <small class="form-text text-muted">Formatos aceptados: JPG, PNG, SVG. Tamaño máximo: 2MB</small>
                             </div>
-                            
+                            <div class="col-md-6">
+                                <div class="logo-preview-container text-center">
+                                    <img id="logoPreview" src="#" alt="Vista previa del logo" class="img-thumbnail d-none" style="max-width: 200px; max-height: 150px;">
+                                    <div id="noLogoPlaceholder" class="text-muted">
+                                        <i class="bi bi-building fs-1"></i>
+                                        <p class="mt-2">No hay logo seleccionado</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información General -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Información General</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="company_name" class="form-label">Nombre de la Empresa/Organización  <span class="text-danger">*</span></label>
                                 <input type="text" 
@@ -215,12 +248,16 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- Información Fiscal -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">Información Fiscal</h5>
-                            </div>
-                            
+                    </div>
+                </div>
+
+                <!-- Información Fiscal -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Información Fiscal</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="fiscal_name" class="form-label">Razón Social</label>
                                 <input type="text" 
@@ -260,12 +297,16 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- Información del Tenant -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">Configuración de Suscripción</h5>
-                            </div>
-                            
+                    </div>
+                </div>
+
+                <!-- Información del Tenant -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Configuración de Suscripción</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="slug" class="form-label">Identificador único del Suscriptor  <span class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -312,7 +353,6 @@
                                     id="limit_users" 
                                     name="limit_users" 
                                     value="{{ old('limit_users') }}" 
-                                    disabled
                                     placeholder="Seleccione un plan primero">
                                     
                                 @error('limit_users')
@@ -347,12 +387,16 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- Información del Administrador del Tenant -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">Administrador de la Suscripción</h5>
-                            </div>
+                    </div>
+                </div>
 
+                <!-- Información del Administrador del Tenant -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Administrador de la Suscripción</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="admin_name" class="form-label">Nombre del Administrador  <span class="text-danger">*</span></label>
                                 <input type="text" 
@@ -418,23 +462,74 @@
                                        placeholder="Reingrese la contraseña">
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Botones de Acción -->
+                <!-- Personalización -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Personalización</h5>
+                    </div>
+                    <div class="card-body">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="d-flex gap-2 justify-content-end">
-                                    <button type="reset" class="btn btn-outline-secondary">
-                                        <i class="fas fa-redo me-2"></i>Limpiar
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-check-circle me-1"></i>Crear Suscripción
-                                    </button>
-                                </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="primary_color" class="form-label">Color Primario</label>
+                                <input type="color" 
+                                       class="form-control form-control-color @error('primary_color') is-invalid @enderror" 
+                                       id="primary_color" 
+                                       name="primary_color" 
+                                       value="{{ old('primary_color', '#0d6efd') }}"
+                                       title="Selecciona el color primario">
+                                @error('primary_color')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <small class="form-text text-muted">Color principal para la interfaz del cliente</small>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="secondary_color" class="form-label">Color Secundario</label>
+                                <input type="color" 
+                                       class="form-control form-control-color @error('secondary_color') is-invalid @enderror" 
+                                       id="secondary_color" 
+                                       name="secondary_color" 
+                                       value="{{ old('secondary_color', '#6c757d') }}"
+                                       title="Selecciona el color secundario">
+                                @error('secondary_color')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <small class="form-text text-muted">Color secundario para la interfaz del cliente</small>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label for="custom_css" class="form-label">CSS Personalizado</label>
+                                <textarea class="form-control @error('custom_css') is-invalid @enderror" 
+                                          id="custom_css" 
+                                          name="custom_css" 
+                                          rows="4"
+                                          placeholder="/* Agrega estilos CSS personalizados aquí */">{{ old('custom_css') }}</textarea>
+                                @error('custom_css')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <small class="form-text text-muted">Estilos CSS adicionales para personalizar la apariencia</small>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            
+
+                <!-- Botones de Acción -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex gap-2 justify-content-end">
+                            <button type="reset" class="btn btn-outline-secondary">
+                                <i class="fas fa-redo me-2"></i>Limpiar
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-1"></i>Crear Suscripción
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -442,6 +537,29 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Preview del logo
+    const logoInput = document.getElementById('logo');
+    const logoPreview = document.getElementById('logoPreview');
+    const noLogoPlaceholder = document.getElementById('noLogoPlaceholder');
+
+    if (logoInput && logoPreview && noLogoPlaceholder) {
+        logoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    logoPreview.src = e.target.result;
+                    logoPreview.classList.remove('d-none');
+                    noLogoPlaceholder.classList.add('d-none');
+                }
+                reader.readAsDataURL(file);
+            } else {
+                logoPreview.classList.add('d-none');
+                noLogoPlaceholder.classList.remove('d-none');
+            }
+        });
+    }
+
     // Generar slug automáticamente a partir del nombre de la empresa
     const companyNameInput = document.getElementById('company_name');
     const usernameInput = document.getElementById('slug');
@@ -545,11 +663,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         planSelect.addEventListener('change', updateUserLimit);
         updateUserLimit();
-    
-
-    
-
-    
     }
 
 });
@@ -577,6 +690,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+    .card {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    .card-header {
+        border-bottom: 1px solid #dee2e6;
+        border-radius: 0.5rem 0.5rem 0 0 !important;
+    }
 
     .form-label {
         font-weight: 700 !important;
@@ -597,12 +720,27 @@ document.addEventListener('DOMContentLoaded', function() {
         color: #6c757d;
     }
 
-    
     .form-control:required, .form-select:required {
         border-left: 3px solid #0d6efd;
     }
 
     .form-control:required:focus, .form-select:required:focus {
         border-left: 3px solid #0d6efd;
+    }
+
+    .logo-preview-container {
+        border: 2px dashed #dee2e6;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-control-color {
+        height: 45px;
+        padding: 0.375rem;
     }
 </style>
