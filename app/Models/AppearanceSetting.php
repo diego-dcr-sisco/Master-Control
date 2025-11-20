@@ -22,7 +22,7 @@ class AppearanceSetting extends Model
     ];
 
     protected $attributes = [
-        'primary_color' => '#64b5f6',
+        'primary_color' => '#182A41',
         'secondary_color' => '#b0bec5',
         'logo_path' => 'images/zonda/landscape_logo.png',
         'watermark_path' => 'images/zonda/watermark.png',

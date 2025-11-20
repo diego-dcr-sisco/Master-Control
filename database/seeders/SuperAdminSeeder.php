@@ -23,6 +23,7 @@ class SuperAdminSeeder extends Seeder
             'password' => Hash::make('@superAdmin'),
             'role_id' => 4,
             'type_id' => 1,
+            'status_id' => 2,
         ]);
 
         // Asignar solo el rol
