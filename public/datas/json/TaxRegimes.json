@@ -1,0 +1,116 @@
+[
+  {
+    "Natural": false,
+    "Moral": true,
+    "Name": "General de Ley Personas Morales",
+    "Value": "601"
+  },
+  {
+    "Natural": false,
+    "Moral": true,
+    "Name": "Personas Morales con Fines no Lucrativos",
+    "Value": "603"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Sueldos y Salarios e Ingresos Asimilados a Salarios",
+    "Value": "605"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Arrendamiento",
+    "Value": "606"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Régimen de Enajenación o Adquisición de Bienes",
+    "Value": "607"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Demás ingresos",
+    "Value": "608"
+  },
+  {
+    "Natural": true,
+    "Moral": true,
+    "Name": "Residentes en el Extranjero sin Establecimiento Permanente en México",
+    "Value": "610"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Ingresos por Dividendos (socios y accionistas)",
+    "Value": "611"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Personas Físicas con Actividades Empresariales y Profesionales",
+    "Value": "612"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Ingresos por intereses",
+    "Value": "614"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Régimen de los ingresos por obtención de premios",
+    "Value": "615"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Sin obligaciones fiscales",
+    "Value": "616"
+  },
+  {
+    "Natural": false,
+    "Moral": true,
+    "Name": "Sociedades Cooperativas de Producción que optan por diferir sus ingresos",
+    "Value": "620"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Incorporación Fiscal",
+    "Value": "621"
+  },
+  {
+    "Natural": false,
+    "Moral": true,
+    "Name": "Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",
+    "Value": "622"
+  },
+  {
+    "Natural": false,
+    "Moral": true,
+    "Name": "Opcional para Grupos de Sociedades",
+    "Value": "623"
+  },
+  {
+    "Natural": false,
+    "Moral": true,
+    "Name": "Coordinados",
+    "Value": "624"
+  },
+  {
+    "Natural": true,
+    "Moral": false,
+    "Name": "Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas",
+    "Value": "625"
+  },
+  {
+    "Natural": true,
+    "Moral": true,
+    "Name": "Régimen Simplificado de Confianza",
+    "Value": "626"
+  }
+]

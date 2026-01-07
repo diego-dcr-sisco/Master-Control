@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Plan;
 use App\Models\Tenant;
@@ -24,6 +25,7 @@ class TenantController extends Controller
 {
     private $states_route = 'datas/json/Mexico_states.json';
     private $cities_route = 'datas/json/Mexico_cities.json';
+    private $taxregimes_route = 'datas/json/TaxRegimes.json';
 
     public function index()
     {
@@ -41,7 +43,8 @@ class TenantController extends Controller
         $plans = Plan::all();
         $states = json_decode(file_get_contents(public_path($this->states_route)), true);
         $cities = json_decode(file_get_contents(public_path($this->cities_route)), true);
-        return view('subscriptions_management.create', compact('plans', 'states', 'cities'));
+        $taxRegimes = json_decode(file_get_contents(public_path($this->taxregimes_route)), true);
+        return view('subscriptions_management.create', compact('plans', 'states', 'cities','taxRegimes'));
     }
 
     /**
@@ -64,6 +67,7 @@ class TenantController extends Controller
      */
     public function store(Request $request)
     {
+        
         // Validación actualizada con nuevos campos
         $validated = $request->validate([
             // Campos existentes de información general
@@ -86,7 +90,9 @@ class TenantController extends Controller
             'fiscal_name' => 'nullable|string|max:255',
             'fiscal_regime' => 'nullable|string|max:255',
             'RFC' => 'nullable|string|max:255',
-
+            // Campos para facturación
+            'issuance_place' => 'nullable|string|max:255', // lugar expedición
+            'sat_cert_password' => 'nullable|string|max:255',// Contraseña de la llave privada SAT
             // Campos existentes de configuración de suscripción
             'slug' => 'required|string|unique:tenant,slug',
             'plan_id' => 'required|integer|exists:plans,id',
@@ -108,8 +114,10 @@ class TenantController extends Controller
             'primary_color' => 'nullable|string|max:7|regex:/^#[0-9A-F]{6}$/i', // NUEVO: Color primario en formato HEX
             'secondary_color' => 'nullable|string|max:7|regex:/^#[0-9A-F]{6}$/i', // NUEVO: Color secundario en formato HEX
             'custom_css' => 'nullable|string|max:2000', // NUEVO: CSS personalizado con límite de caracteres
+            
         ]);
-
+        
+        
         DB::beginTransaction();
 
         try {
@@ -125,6 +133,17 @@ class TenantController extends Controller
                 'subscription_start' => $validated['subscription_start'],
                 'subscription_end' => $validated['subscription_end'],
                 'path' => "{$slug}/",
+                // Campos de información fiscal
+                'fiscal_name' => $validated['fiscal_name'],
+                'fiscal_regime' => $validated['fiscal_regime'],
+                'RFC' => $validated['RFC'],
+                'issuance_place' => $validated['issuance_place'], // lugar expedición
+                'zip_code' => $validated['zip_code'],
+                'validated_at' => now(),
+                'sat_cert_password' => $validated['sat_cert_password'],
+                'phone' => $validated['company_phone'],
+                'license_number' => $validated['license_number'],
+                'employer_registration' => $validated['employer_registration'],
             ]);
 
             // Recorrer la lista de permisos de spatie y crear las relaciones en tenant_permission_control

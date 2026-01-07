@@ -265,7 +265,7 @@
                                        id="fiscal_name" 
                                        name="fiscal_name" 
                                        value="{{ old('fiscal_name') }}" 
-                                       placeholder="Ingrese la Razón Social de la Empresa/Organización">
+                                       placeholder="Ingrese la Razón Social de la Empresa/Organización, en mayúsculas y sin régimen societario">
                                 @error('fiscal_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -273,13 +273,14 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="fiscal_regime" class="form-label">Régimen Fiscal</label>
-                                <input type="text" 
-                                       class="form-control @error('fiscal_regime') is-invalid @enderror" 
-                                       id="fiscal_regime" 
-                                       name="fiscal_regime" 
-                                       value="{{ old('fiscal_regime') }}"
-                                       placeholder="Ingrese el Régimen Fiscal de la Empresa/Organización">
-                                @error('fiscal_regime')
+                                <select class="form-select @error('fiscal_regime') is-invalid @enderror" id="fiscal_regime" name="fiscal_regime"
+                                    onchange="load_fiscalRegime()" required>
+                                    <option value="" selected disabled hidden>Selecciona un Régimen Fiscal</option>
+                                    @foreach ($taxRegimes as $taxRegime)
+                                        <option value="{{ $taxRegime['Value'] }}">{{ $taxRegime['Value']}}-{{$taxRegime['Name'] }}</option>
+                                    @endforeach
+                                </select>
+                                @error('state')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -296,6 +297,52 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                    <label for="issuance_place" class="form-label">Domicilio Fiscal</label>
+                                    <input type="text" 
+                                        class="form-control @error('issuance_place') is-invalid @enderror" 
+                                        id="issuance_place" 
+                                        name="issuance_place" 
+                                        value="{{ old('issuance_place') }}" 
+                                        placeholder="Ingrese el domicilio fiscal exactamente igual a como aparece en su RFC">
+                                    @error('issuance_place')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="employer_registration" class="form-label">Registro Patronal  <span class="text-danger"></label>
+                                <input type="text" 
+                                       class="form-control @error('employer_registration') is-invalid @enderror" 
+                                       id="employer_registration" 
+                                       name="employer_registration" 
+                                       value="{{ old('employer_registration') }}"
+                                       placeholder="">
+                                @error('employer_registration')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                    <label for="sat_cert_password" class="form-label">Contraseña</label>
+                                    <div class="input-group">
+                                        <input type="password" 
+                                            class="form-control @error('sat_cert_password') is-invalid @enderror" 
+                                            id="sat_cert_password" 
+                                            name="sat_cert_password" 
+                                            placeholder="*********">
+                                        @error('sat_cert_password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <button class="btn btn-outline-dark  border-dark" type="button"  
+                                            onclick="togglePassword()">
+                                            <i id="eye-icon-pass" class="bi bi-eye-slash-fill"></i>
+                                        </button>
+
+                                    </div>
+                                    
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -388,7 +435,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
 
                 <!-- Información del Administrador del Tenant -->
                 <div class="card mb-4">
@@ -664,7 +711,7 @@ document.addEventListener('DOMContentLoaded', function() {
         planSelect.addEventListener('change', updateUserLimit);
         updateUserLimit();
     }
-
+    
 });
 </script>
 <script type="text/javascript">
@@ -685,6 +732,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 option.value = c;
                 select_city.appendChild(option);
             });
+        }
+    }
+</script>
+
+<script>
+    function togglePassword() {
+        var passwordInput = $('#sat_cert_password');
+        var eyeIcon = $('#eye-icon-pass');
+
+        if (passwordInput.attr('type') == 'text') {
+            passwordInput.attr('type', 'password');
+            eyeIcon.removeClass('bi-eye-fill').addClass('bi-eye-slash-fill');
+        } else {
+            passwordInput.attr('type', 'text');
+            eyeIcon.removeClass('bi-eye-slash-fill').addClass('bi-eye-fill');
         }
     }
 </script>

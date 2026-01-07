@@ -19,6 +19,17 @@ class Tenant extends Model
         'subscription_start',
         'subscription_end',
         'path',
+        // Campos de información fiscal para facturación
+        'fiscal_name', // razón social (TaxName)
+        'fiscal_regime', // régimen fiscal (sólo código)
+        'RFC',
+        'issuance_place', // lugar expedición
+        'zip_code',
+        'validated_at', // validado
+        'sat_cert_password', // Contraseña de la llave privada SAT
+        'phone',
+        'license_number',
+        'employer_registration',
     ];
 
     protected $guard_name = 'web'; 
@@ -27,7 +38,9 @@ class Tenant extends Model
         'is_active' => 'boolean',
         'subscription_start' => 'date',
         'subscription_end' => 'date',
-        'deleted_at' => 'datetime'
+        'deleted_at' => 'datetime',
+        'validate_at' => 'datetime'
+
     ];
 
    
